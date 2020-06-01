@@ -1,0 +1,19 @@
+{
+  "name": "nodepress-healthchecker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "health check",
+    "health",
+    "express"
+  ],
+  "bugs": {
+    "url": "https://github.com/yearnlune/"
+  },
+  "author": "DONGHWAN, KIM",
+  "license": "ISC"
+}
