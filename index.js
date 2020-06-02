@@ -1,1 +1,1 @@
-module.exports = require('lib/healthCheck');
+module.exports = require('./lib/healthCheck');
