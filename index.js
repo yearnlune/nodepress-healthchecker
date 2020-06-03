@@ -1,4 +1,3 @@
-const healthCheck = require('./lib/healthCheck');
-healthCheck.init = require('./lib/init');
+let healthCheck = require('./lib/healthCheck');
 
 module.exports = healthCheck;
