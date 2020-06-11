@@ -10,7 +10,7 @@ const client = redis.createClient({
 });
 
 healthChecker.init([{
-    category: 'maria',
+    category: 'redis',
     healthCheckHandler: () => {
         return new Promise(((resolve, reject) => {
             try {
