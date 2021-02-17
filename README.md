@@ -66,3 +66,33 @@ healthChecker.init([{
 }]);
 
 ```
+### MongoDB
+```typescript
+import {MongoClient} from "mongodb";
+import * as healthChecker from "nodepress-healthchecker";
+
+let mongodb: MongoClient;
+MongoClient.connect('mongodb://mongo-db:27017', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    poolSize: 5
+}, (err, client) => {
+    if (err) {
+        console.error(err);
+    } else {
+        mongodb = client;
+    }
+});
+
+healthChecker.init([{
+    category: 'mongo',
+    healthCheckHandler: () => {
+        return new Promise<void>(((resolve, reject) => {
+            mongodb.db().command({ping: 1})
+                .then(() => resolve())
+                .catch(() => reject());
+        }));
+    }
+}]);
+
+```
