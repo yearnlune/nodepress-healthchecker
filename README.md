@@ -1,5 +1,8 @@
 # nodepress-healthchecker
 
+### Environment
+`HEALTH_CHECK_LOG`: false
+
 ### redis
 ```typescript
 import * as redis from 'redis'
@@ -21,6 +24,41 @@ healthChecker.init([{
                 reject();
             } catch (e) {
                 console.error("REDIS NOT CONNECTED");
+                reject();
+            }
+        }));
+    }
+}]);
+
+```
+### rabbitmq
+```typescript
+import * as amqp from 'amqplib/callback_api';
+import * as healthChecker from "nodepress-healthchecker";
+
+let rabbitmq: amqp.Connection;
+
+amqp.connect('amqp://rabbitmq', (err, connection) => {
+        if (err) {
+          console.error('connect error', err);
+        } else {
+          rabbitmq = connection;
+          console.log('RABBITMQ CONNECTED');
+        }
+      });
+
+healthChecker.init([{
+    category: 'rabbit',
+    healthCheckHandler: () => {
+        return new Promise(((resolve, reject) => {
+            try {
+                if (rabbitmq) {
+                    resolve();
+                } else {
+                    reject();
+                }
+            } catch (e) {
+                console.error("RABBIT NOT CONNECTED");
                 reject();
             }
         }));
